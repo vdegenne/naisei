@@ -105,7 +105,7 @@ export default defineConfig({
 		// preserveSymlinks: true,
 	},
 	server: {
-		hmr: false,
+		// hmr: false,
 		port: 5192,
 		proxy: {
 			// '/api': 'http://localhost:23058',

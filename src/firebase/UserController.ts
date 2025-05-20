@@ -42,7 +42,7 @@ export class UserController
 		}
 	}
 
-	get uid() {
+	get id() {
 		return this.user?.uid;
 	}
 

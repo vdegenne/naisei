@@ -4,8 +4,9 @@ import {withStyles} from 'lit-with-styles';
 import {customElement} from 'lit/decorators.js';
 import {store} from '../store.js';
 import styles from './app-shell.css?inline';
-import {authManager} from '../loader.js';
 import {confirm} from '../confirm.js';
+import '../managers/daysManager/daysManager.js';
+import {authManager} from '../authManager.js';
 
 declare global {
 	interface Window {
@@ -26,6 +27,11 @@ export class AppShell extends LitElement {
 				<md-icon>power</md-icon>
 			</md-icon-button>
 
+			<days-manager></days-manager>
+
+			<md-fab size="large" class="fixed bottom-10 right-10">
+				<md-icon slot="icon">add</md-icon>
+			</md-fab>
 			<!-- -->`;
 	}
 
