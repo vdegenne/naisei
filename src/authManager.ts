@@ -1,12 +1,14 @@
 import toast from 'toastit';
 import {AuthManagerBase} from './firebase/AuthManagerBase.js';
 import {UserController} from './firebase/UserController.js';
+import {daysManager} from './managers/daysManager/daysManager.js';
 
 class AuthManager extends AuthManagerBase {
 	async onUserConnected(user: UserController) {
 		if (user.isPremium) {
 			const {app} = await import('./app-shell/app-shell.js');
 			shell.appendChild(app);
+			daysManager.loadDays();
 		} else {
 			toast('Access denied');
 			await this.logout();

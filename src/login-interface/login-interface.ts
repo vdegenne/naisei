@@ -3,9 +3,9 @@ import {withStyles} from 'lit-with-styles';
 import {customElement} from 'lit/decorators.js';
 import toast from 'toastit';
 import {SVG_GOOGLE_G, SVG_LOGO} from '../assets/assets.js';
-import {authManager} from '../loader.js';
 import {MaterialShellChild} from '../MaterialShellChild.js';
 import styles from './login-interface.css?inline';
+import {authManager} from '../authManager.js';
 
 declare global {
 	interface HTMLElementTagNameMap {

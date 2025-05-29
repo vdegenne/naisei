@@ -12,7 +12,10 @@ export async function addDay(day: Day) {
 	}
 	const firestore = await getFirestore();
 	const colRef = collection(firestore, `users/${userCtrl.id}/days`);
-	console.log(day.toJSON());
-	const docRef = await addDoc(colRef, day.toJSON());
+	const docRef = await addDoc(
+		colRef,
+		day.toJSON({removeUndefinedValues: true}),
+	);
 	day.id = docRef.id;
+	return day;
 }

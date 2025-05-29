@@ -67,7 +67,7 @@ export function getElementsTree(node: Element): Promise<Element[]> {
 }
 export async function getElementInTree(
 	from: Element,
-	condition: (element: Element) => boolean
+	condition: (element: Element) => boolean,
 ): Promise<Element | undefined> {
 	for (const element of await getElementsTree(from)) {
 		if (condition(element)) {
@@ -149,9 +149,27 @@ export async function loadDataFromFile(): Promise<string> {
 
 export function propertyValuesToJson<T>(
 	changed: PropertyValues<T>,
-	object: T
+	object: T,
 ): Partial<T> {
 	return Object.fromEntries(
-		[...changed.keys()].map((key) => [key, object[key]])
+		[...changed.keys()].map((key) => [key, object[key]]),
 	) as Partial<T>;
+}
+
+export function getDateFromTimestamp(timestamp: number): string {
+	const date = new Date(timestamp < 1e12 ? timestamp * 1000 : timestamp);
+	const day = date.getDate().toString().padStart(2, '0');
+	const month = (date.getMonth() + 1).toString().padStart(2, '0');
+	return `${day}/${month}`;
+}
+
+/**
+ * Returns a new reference
+ */
+export function removeObjectKeys(arr: any, keys: string[]) {
+	const clone = {...arr};
+	for (const key of keys) {
+		delete clone[key];
+	}
+	return clone;
 }

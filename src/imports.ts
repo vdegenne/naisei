@@ -1,6 +1,7 @@
 import {getElement} from 'html-vision';
 import {type SettingsDialog} from './settings/settings-dialog.js';
 import {userCtrl} from './firebase/UserController.js';
+import {type Day} from './objects/Day.js';
 
 export async function getThemeStore() {
 	const {themeStore} = await import('./styles/themeStore.js');
@@ -31,4 +32,16 @@ export async function getFirestore() {
 		const {getFirestore} = await import('firebase/firestore');
 		return getFirestore(firebase);
 	}
+}
+
+export async function getDayDialog() {
+	const {DayDialog} = await import('./day/day-dialog.js');
+	return DayDialog;
+}
+
+export async function openDayDialog(day?: Day) {
+	const Dialog = await getDayDialog();
+	const dialog = new Dialog(day);
+	dialog.show();
+	return dialog;
 }

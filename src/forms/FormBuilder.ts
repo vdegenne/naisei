@@ -1,5 +1,6 @@
 import {type MdChipSet} from '@material/web/chips/chip-set.js';
 import {type MdFilterChip} from '@material/web/chips/filter-chip.js';
+import {MdInputChip} from '@material/web/chips/input-chip.js';
 import type {CloseMenuEvent, MdMenu} from '@material/web/menu/menu.js';
 import {type MdFilledSelect} from '@material/web/select/filled-select.js';
 import {type MdSlider} from '@material/web/slider/slider.js';
@@ -14,7 +15,6 @@ import {
 } from 'lit/static-html.js';
 import '../material/outlined-field-patch.js';
 import {bindInput} from './bindInput.js';
-import {MdInputChip} from '@material/web/chips/input-chip.js';
 
 interface SharedOptions {
 	autofocus: boolean;
@@ -327,7 +327,7 @@ export function CHIPSELECT<T>(
 
 interface TextFieldOptions extends SharedOptions {
 	// TODO: find a generic type for input type
-	type: 'text' | 'number' | 'textarea';
+	type: 'text' | 'number' | 'textarea' | 'date';
 	suffixText: string | undefined;
 	/** @default 'outlined' */
 	style: 'filled' | 'outlined';
@@ -367,22 +367,31 @@ export const TEXTFIELD = <T>(
 			style = literal`outlined`;
 			break;
 	}
+
+	const textFieldRef = createRef<HTMLInputElement>();
+	const textfield = () => textFieldRef.value;
+
+	// setTimeout(() => {
+	// 	textfield().valueAsNumber = host[key] as string;
+	// }, 1000);
+
 	return staticHtml`
 		<md-${style}-text-field
+			${ref(textFieldRef)}
 			class="flex-1"
 			?autofocus=${_options.autofocus}
 			label=${label.replace(/\*/g, '')}
 			type=${_options.type}
 			.rows=${_options.rows}
-			value=${host[key]}
-			${bindInput(host, key)}
 			?required=${label.includes('*')}
 			suffix-text=${ifDefined(_options.suffixText)}
+			${bindInput(host, key)}
 		>
 			${
 				_options.resetButton
 					? html`<md-icon-button
 							slot="trailing-icon"
+							form=""
 							@click=${() => {
 								(host[key] as string) = '';
 							}}
