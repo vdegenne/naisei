@@ -16,6 +16,7 @@
 		"@vdegenne/about-dialog": "^0.4.2",
 		"@vdegenne/ago": "^0.1.1",
 		"@vdegenne/debouncer": "^1.0.3",
+		"@vdegenne/firebase": "file:../firebase",
 		"@vdegenne/material-color-helpers": "^1.11.1",
 		"@vdegenne/mini-rest": "^0.2.1",
 		"@vdegenne/rollup-plugin-minify-html": "^1.0.6",

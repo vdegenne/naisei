@@ -92,6 +92,15 @@ export class DayDialog extends LitElement {
 				</form>
 
 				<div slot="actions">
+					${this.type === 'Edit'
+						? html`
+								<md-filled-tonal-button error>
+									<md-icon slot="icon">delete</md-icon>
+									Delete
+								</md-filled-tonal-button>
+							`
+						: null}
+					<div class="flex-1"></div>
 					<md-text-button form="form">Cancel</md-text-button>
 					<md-filled-button
 						?disabled=${!this.canSubmit()}

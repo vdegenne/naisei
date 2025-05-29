@@ -6,7 +6,8 @@ import './styles/shared.js';
 
 import '@material/web/all.js';
 
-import './authManager.js';
+// import './authManager.js';
+import './firebase.js';
 
 import './global-listeners.js';
 import {type UserController} from './firebase/UserController.js';
